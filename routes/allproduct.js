@@ -5,7 +5,7 @@ const Product = require('../model/product_schema')
 router.get('/',async (req,res) => {
     let searchoption = {}
     if(req.query.input_product != null && req.query.input_product !== ""){
-        searchoption.input_product = new RegExp(searchoption.input_product,'i')
+        searchoption.name = new RegExp(req.query.input_product,'i')
     }
     try{
         const product = await Product.find(searchoption)
@@ -16,6 +16,10 @@ router.get('/',async (req,res) => {
     } catch {
         res.redirect('/allproduct')
     }
+})
+
+router.get('/:id', (req,res) => {
+    res.send(req.params.id)
 })
 
 

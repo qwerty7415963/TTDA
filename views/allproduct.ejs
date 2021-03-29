@@ -51,28 +51,23 @@
     </form>
     <br>
     <div>
-        <% products.forEach(product => { %>
-            <section class="text-center mb-4">
-
-                <!--Grid row-->
-                <div class="row wow fadeIn">
-        
-                  <!--Grid column-->
-                  <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="card">
-                            <div class="view overlay">
-                                <img src="<%= product.productImage %>" class="card-img-top">
-                            </div>
-                                    <div class="card-body text-center">
-                                        <a href="/allproduct/<%= product.name %>" class="grey-text"><%= product.name %>
-                                            <span class="badge badge-pill danger-color">NEW</span>
-                                        </a>
-                                    </div>
-                            <h4 class="font-weight-bold blue-text">
-                                <strong><%= product.price %>$ </strong>
-                            </h4>
+        <div class="container">
+            <div class="row">
+            <% products.forEach(product => { %>
+                <div class="col-xs-6">
+                    <div class="card" style="width:270px">
+                        <img class="card-img-top" src="<%= product.productImage %> " alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h5>
+                                <strong><a href="/allproduct/<%= product._id%>"><%= product.name %></a></strong>
+                            </h5>
+                            <p class="card-text"><%= product.description %> </p>
+                            <h4 style="text-align: center;"><%= product.price %>$ </h4>
                         </div>
-                            <% }) %> 
                     </div>
+                </div>
+            <% }) %>
+            </div> 
+        </div>
 </body>
 </html>

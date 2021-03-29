@@ -24,9 +24,7 @@ const product_schema = new Schema({
         required: true
     }
 })
-product_schema.virtual('productImagePath').get(function() {
-    
-})
+
 const Product = mongoose.model("Product",product_schema)
 module.exports = Product
 
