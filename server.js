@@ -17,6 +17,7 @@ app.set("views", __dirname + "/views")
 app.use(express.static(__dirname + "/public"))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({limit: '10mb' ,extended: false}))
+app.use(express.static(__dirname+'/uploads'))
 app.use(passport.initialize())
 app.use(flash())
 app.use(session({

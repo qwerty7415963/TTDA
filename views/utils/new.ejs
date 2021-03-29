@@ -8,9 +8,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" type='text/css' href="/main.css">
-    <title>Admin</title>
+    <title>New product</title>
 </head>
-<body>
-    <h1>admin</h1>
+<body> 
+    <form class="form-inline" method="POST" action="/admin/new" enctype="multipart/form-data">
+        <div>
+            <label for="productName">Name:</label>
+            <input type="text" class="form-control" name="name">
+            <label for="quantity">Quantity:</label>
+            <input type="number" class="form-control" name="quantity">
+        </div>
+        <div>
+            <label for="price">Price:</label>
+            <input type="number" class="form-control" name="price">
+            <label>Description</label>
+            <textarea name="description"></textarea>
+        </div>
+        <label>CoverImage</label>
+        <input type="file" name="productImage">
+        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-danger">Cancel</button>
+    </form>
 </body>
 </html>

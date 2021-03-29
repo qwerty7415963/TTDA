@@ -50,10 +50,29 @@
         <button type="submit">Search</button>
     </form>
     <br>
-    <% product.forEach(element => { %>
-        <div><%= product.name %></div>
-        <div><%= product.quantity %></div>
-        <div><%= product.price %></div>    
-    <% }); %>
+    <div>
+        <% products.forEach(product => { %>
+            <section class="text-center mb-4">
+
+                <!--Grid row-->
+                <div class="row wow fadeIn">
+        
+                  <!--Grid column-->
+                  <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="card">
+                            <div class="view overlay">
+                                <img src="<%= product.productImage %>" class="card-img-top">
+                            </div>
+                                    <div class="card-body text-center">
+                                        <a href="/allproduct/<%= product.name %>" class="grey-text"><%= product.name %>
+                                            <span class="badge badge-pill danger-color">NEW</span>
+                                        </a>
+                                    </div>
+                            <h4 class="font-weight-bold blue-text">
+                                <strong><%= product.price %>$ </strong>
+                            </h4>
+                        </div>
+                            <% }) %> 
+                    </div>
 </body>
 </html>
