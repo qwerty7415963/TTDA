@@ -40,11 +40,13 @@ const homeroute = require('./routes/home')
 const signuproute = require('./routes/signup')
 const loginroute = require('./routes/login')
 const allproductroute = require('./routes/allproduct')
+const adminroute = require('./routes/admin')
 
 app.use('/',homeroute)
 app.use('/signup',signuproute)
 app.use('/login',loginroute)
 app.use('/allproduct',allproductroute)
+app.use('/admin',adminroute)
 //
 
 app.listen(process.env.PORT || 3000, () => {
