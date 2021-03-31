@@ -8,8 +8,8 @@ const mongoose = require('mongoose')
 const flash = require('express-flash')
 const session = require('express-session')
 const passport = require('passport')
-const initializepassport = require('./public/js/passport_config')
-
+//const initializepassport = require('./public/js/passport_config')
+const methodOverride = require('method-override')
 
 app.set('view engine',"ejs")
 app.set("views", __dirname + "/views")
@@ -18,9 +18,10 @@ app.use(express.static(__dirname + "/public"))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({limit: '10mb' ,extended: false}))
 app.use(express.static(__dirname+'/uploads'))
+app.use(methodOverride('_method'))
 app.use(passport.initialize())
 app.use(flash())
-app.use(session({
+app.use(session({   
     secret:"secret",
     resave:true,
     saveUninitialized:true

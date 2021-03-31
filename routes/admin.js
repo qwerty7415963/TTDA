@@ -1,8 +1,8 @@
+const fs = require('fs')
 const express = require('express')
 const multer = require('multer')
 const path = require('path')
 const Product = require('../model/product_schema')
-//const uploadPath = path.join('public',Product.productImagePath)
 const router = express.Router()
 const imagemimeTypes = ['images/jpeg','images/png' , 'images/gif','images/jpg'] 
 var storage = multer.diskStorage({
@@ -17,12 +17,24 @@ var storage = multer.diskStorage({
   
   var upload = multer({ storage: storage });
 
-router.get('/', (req,res) => {
-    res.render('admin')
+router.get('/', async (req,res) => {
+    let searchoption = {}
+    if(req.query.input_product != null && req.query.input_product !== ""){
+        searchoption.name = new RegExp(req.query.input_product,'i')
+    }
+    try{
+        const product = await Product.find(searchoption)
+        res.render('admin',{
+            products: product,
+            searchoption: req.query.input_product
+        })
+    } catch {
+        res.redirect('/admin')
+    }
 })
 
 router.get('/new' ,(req,res) => {
-    res.render('utils/new')
+    renderNewPage(res, new Product())
 })
 
 router.post('/new', upload.single('productImage') , async (req,res) => {
@@ -40,14 +52,46 @@ router.post('/new', upload.single('productImage') , async (req,res) => {
         const newProduct = await product.save()
         res.redirect('/admin')
     } catch {
-        res.render('utils/new',{
-            errorMessage:"err"
-        })
+        if(product.productImage != null) {
+            fs.unlink(req.file.path, (err) => {if (err) console.log(err)})
+            }
+        renderNewPage(res, product, true)
     } 
 
 })
-router.get('/update',(req,res) => {
 
+router.get('/:id',(req,res) => {
+    res.send("show" + req.params.id)
 })
+
+router.get('/:id/update',async(req,res) => {
+    try {
+        const product =  await Product.findById(req.params.id)
+        console.log(req.params.id)
+        res.render('utils/update',{
+            product: product
+        })
+    } catch {
+
+    }
+})
+
+router.put(':/id',(req,res) => {
+    res.send("update" +req.params.id)
+})
+
+router.post('/:id',(req,res) => {
+    res.send("Delete" + req.params.id)
+})
+async function renderNewPage(res ,product, hasError = false) {
+    try {
+        const product = await Product.find({})
+        const params = {products: product}
+        res.render('utils/new',params)
+        if(hasError) params.errorMessage = "Loi khong the tao them san pham"
+    } catch {
+        res.redirect('/admin')
+    }
+}
 
 module.exports = router

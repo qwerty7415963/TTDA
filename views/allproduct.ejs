@@ -9,6 +9,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" type='text/css' href="/main.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script type ="module" defer src="/js/script.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -37,32 +39,36 @@
         </div>
     </nav>
     <br>
-    <form>
-        <label>Name:</label>
-        <input type="text" placeholder="Search..." name="input_product" value="<%= searchoption %>">
-        <button type="submit">Search</button>
-    </form>
-    <form>
-        <label for="product">Sort by:</label>
-        <select name='product'>
-            <option value=""></option>
-        </select>
-        <button type="submit">Search</button>
-    </form>
+    <div class="row">
+        <div class="col-xl-6 col-md-4 col-sm-3">
+            <form>
+                <div class="input-group rounded">
+                    <input type="search" class="form-control rounded" placeholder="Nhap ten san pham" aria-label="Search"
+                    aria-describedby="search-addon" name="input_product" value="<%= searchoption %> " />
+                    <span class="input-group-text border-0" id="search-addon">
+                    <i class="fas fa-search"></i>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
     <br>
     <div>
         <div class="container">
             <div class="row">
             <% products.forEach(product => { %>
-                <div class="col-xs-6">
-                    <div class="card" style="width:270px">
+                <div class="col-xs-6 col-sm-3">
+                    <div class="card">
                         <img class="card-img-top" src="<%= product.productImage %> " alt="Card image" style="width:100%">
                         <div class="card-body">
                             <h5>
                                 <strong><a href="/allproduct/<%= product._id%>"><%= product.name %></a></strong>
                             </h5>
                             <p class="card-text"><%= product.description %> </p>
-                            <h4 style="text-align: center;"><%= product.price %>$ </h4>
+                            <h4 style="text-align: center;"><%= product.price %></h4>
+                            <div class="text-center">
+                                <button class="btn btn-sm btn-dark buybtn" id="<%= product.name %>">Mua Hang</button>
+                            </div>
                         </div>
                     </div>
                 </div>
