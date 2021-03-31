@@ -65,9 +65,8 @@ router.get('/:id',(req,res) => {
 })
 
 router.get('/:id/update',async(req,res) => {
+    const product =  await Product.findById(req.params.id)
     try {
-        const product =  await Product.findById(req.params.id)
-        console.log(req.params.id)
         res.render('utils/update',{
             product: product
         })
@@ -80,8 +79,15 @@ router.put(':/id',(req,res) => {
     res.send("update" +req.params.id)
 })
 
-router.post('/:id',(req,res) => {
-    res.send("Delete" + req.params.id)
+router.post('/:id',async (req,res) => {
+    try {
+        const del_product = await Product.findByIdAndDelete(req.params.id)
+        res.redirect('/admin')
+    } catch {
+        res.render('admin',{
+            errorMessage: "Cannot delete this product"
+        })
+    }
 })
 async function renderNewPage(res ,product, hasError = false) {
     try {
