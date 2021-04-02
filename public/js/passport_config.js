@@ -8,7 +8,6 @@ function initialize(passport, email) {
       if (user == null) {
         return done(null, false, { message: 'No user with that email' })
       }
-  
       try {
         if (await bcrypt.compare(password, user.password)) {
           return done(null, user)
@@ -22,7 +21,7 @@ function initialize(passport, email) {
   }
 
   passport.use(new LocalStrategy({ usernameField: 'email',passwordField:"password"}, authenticateUser))
-  passport.serializeUser((user, done) => done(null, user.id))
+  passport.serializeUser((user, done) => {console.log(user);done(null, user.id)})
   passport.deserializeUser((id, done) => {
     User.findById(id, (err,user) => {
       return done(null,user)

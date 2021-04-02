@@ -14,10 +14,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>admin</h1>
     <form>
         <div class="input-group rounded">
-            <input type="search" class="form-control rounded" placeholder="Nhap ten san pham" aria-label="Search"
+            <input type="search" class="form-control rounded" placeholder="Nhập tên sản phẩm" aria-label="Search"
             aria-describedby="search-addon" name="input_product" value="<%= searchoption %> " />
             <span class="input-group-text border-0" id="search-addon">
             <i class="fas fa-search"></i>
@@ -37,9 +36,9 @@
                             <p class="card-text"><%= product.description %> </p>
                             <h4 style="text-align: center;"><%= product.price %> VND</h4>
                             <div class="text-center">
-                                <a href="/admin/<%= product._id %>/update " class="btn btn-warning" role="button">Sua</a>
+                                <a href="/admin/<%= product._id %>/update " class="btn btn-warning" role="button">Sửa</a>
                                 <form method="POST" action="/admin/<%= product._id %>?_method=DELETE"> 
-                                    <button class="btn btn-danger" type="submit">Xoa</button>
+                                    <button class="btn btn-danger" type="submit">Xóa</button>
                                 </form> 
                             </div>
                         </div>

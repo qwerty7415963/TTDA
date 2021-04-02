@@ -22,6 +22,9 @@ const product_schema = new Schema({
     productImage: {
         type: String,
         required: true
+    },
+    filePath: {
+        type:String
     }
 })
 

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="SangBui"></meta>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -23,16 +24,21 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-atuo">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="/">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/allproduct">All Product</a>
+                        <a class="nav-link" href="/allproduct">Sản Phẩm</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="/login">Đăng Nhập</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/signup">Sign up</a>
+                        <a class="nav-link" href="/signup">Đăng Ký</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cart"><img src="/images/cart.png" style="width: 1.7em;"><%if(session != undefined) { %>
+                                                                                                                <span class="badge badge-pill badge-dark"><%= session.totalQty %></span>
+                                                                                                            <% } %></a>
                     </li>
                 </ul>
             </div>
@@ -65,6 +71,34 @@
                 <span class="carousel-control-next-icon"></span>
               </a>
         </div>
+        <section class="page-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 text-center">
+                        <div class="mt-5">
+                            <img style="float: left;" width="20%" height="20%"" src="https://theordinaryvietnam.shop/wp-content/uploads/2020/06/ship.png" class="attachment-large size-large lazyloaded" alt="" sizes="(max-width: 1057px) 100vw, 1057px" srcset="https://theordinaryvietnam.shop/wp-content/uploads/2020/06/ship.png 1057w, https://theordinaryvietnam.shop/wp-content/uploads/2020/06/ship-768x767.png 768w, https://theordinaryvietnam.shop/wp-content/uploads/2020/06/ship-300x300.png 300w, https://theordinaryvietnam.shop/wp-content/uploads/2020/06/ship-600x599.png 600w, https://theordinaryvietnam.shop/wp-content/uploads/2020/06/ship-100x100.png 100w" data-ll-status="loaded">
+                            <h5 class="h4 mb-2">Free Ship</h5>
+                            <p class="text-muted mb-0">Miễn Phí Giao Hàng Toàn Quốc</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 text-center">
+                        <div class="mt-5">
+                            <img style="float: left;" width="20%" height="20%" src="/images/11111.png" data-ll-status="loaded">
+                            <h5 class="h4 mb-2">Hàng Chính Hãng</h5>
+                            <p class="text-muted mb-0">Đảm Bảo Hàng Thật Chính Hãng</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 text-center">
+                        <div class="mt-5">
+                            <img style="float: left;" width="20%" height="20%" src="/images/qua.png" class="attachment-large size-large lazyloaded" alt="" sizes="(max-width: 1125px) 100vw, 1125px" data-ll-status="loaded">
+                            <h5 class="h4 mb-2">Quà tặng</h5>
+                            <p class="text-muted mb-0">Hàng Ngàn Quà Tặng Đặc Biệt</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
     </div>
 </body>
 </html>

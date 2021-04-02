@@ -3,6 +3,7 @@ const router = express.Router()
 const Product = require('../model/product_schema')
 
 router.get('/',async (req,res) => {
+    console.log(req.isAuthenticated())
     let searchoption = {}
     if(req.query.input_product != null && req.query.input_product !== ""){
         searchoption.name = new RegExp(req.query.input_product,'i')

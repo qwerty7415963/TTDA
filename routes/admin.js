@@ -44,11 +44,10 @@ router.post('/new', upload.single('productImage') , async (req,res) => {
         quantity: req.body.quantity,
         price: req.body.price,
         description: req.body.description,
-        productImage: fileName
+        productImage: fileName,
+        filePath:req.file.path
     })
     try {
-        console.log(fileName)
-        console.log(req.file.path)
         const newProduct = await product.save()
         res.redirect('/admin')
     } catch {
@@ -65,27 +64,62 @@ router.get('/:id',(req,res) => {
 })
 
 router.get('/:id/update',async(req,res) => {
+
     const product =  await Product.findById(req.params.id)
     try {
         res.render('utils/update',{
             product: product
         })
     } catch {
-
+        res.redirect('/admin')
     }
 })
 
-router.put(':/id',(req,res) => {
-    res.send("update" +req.params.id)
+router.put('/:id',upload.single("productImage"), async (req,res) => {
+    const fileName = req.file != null ? req.file.filename : null
+    console.log(fileName)
+    let product
+    try {
+        product = await Product.findById(req.params.id)
+        product.name = req.body.name
+        product.quantity = req.body.quantity
+        product.price = req.body.price
+        product.productImage = fileName
+        product.filePath = req.file.path
+        await product.save((err,data) => {
+            if(err) {
+                console.log(err)
+                return (err,null)
+            }
+            console.log(product)
+            return (null,data)
+        })
+        console.log(product)
+        res.redirect(`/admin/${product._id}`)
+    } catch {
+        if(product.productImage != null) {
+            fs.unlink(req.file.path, (err) => {if (err) console.log(err)})
+            }
+        res.render('utils/update',{
+            product: product,
+            errorMessage:"Loi khong the sua san pham"
+        })
+    }
+
 })
 
-router.post('/:id',async (req,res) => {
+//delete
+router.delete('/:id',async (req,res) => {
+    let del_product
     try {
-        const del_product = await Product.findByIdAndDelete(req.params.id)
+        del_product = await Product.findById(req.params.id)
+        console.log(del_product.filePath)
+        await del_product.remove()
+        fs.unlink(del_product.filePath, (err) => {if(err) console.log(err)})
         res.redirect('/admin')
     } catch {
         res.render('admin',{
-            errorMessage: "Cannot delete this product"
+            errorMessage: `Cannot delete this product: ${del_product.name}`
         })
     }
 })
