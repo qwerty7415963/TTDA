@@ -32,6 +32,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/signup">Đăng Ký</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cart"><img src="/images/cart.png" style="width: 1.7em;"><%if(session != undefined) { %>
+                                                                                                                <span class="badge badge-pill badge-dark"><%= session.totalQty %></span>
+                                                                                                            <% } %></a>
+                    </li>
                 </ul>
             </div>
         </div>

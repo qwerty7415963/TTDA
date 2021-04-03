@@ -37,7 +37,7 @@
                                     <% if(products) { %>
                                         <% products.forEach(product => { %>
                                             <tr>
-                                                <td><img src="<%= product.item.productImage %> "><div style="display: inline;" class="col-md-9 text-left mt-sm-2"><strong><%= product.item.name %></strong></div></td>
+                                                <td><img style="width: 200px;height: 200px;" src="<%= product.item.productImage %> "><div style="display: inline;" class="col-md-9 text-left mt-sm-2"><strong><%= product.item.name %></strong></div></td>
                                                 <td data-th="Quantity">
                                                     <input type="number" class="form-control form-control-lg text-center" value="<%= product.qty %>">
                                                 </td>
@@ -53,9 +53,31 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        <%  }) %>
-                                    <% } %>  
+                                            <% }) %>
+                                        <% } %> 
                                 </tbody>
+                            </table>
+                            <% if(products) { %> 
+                                <div class="row mt-4 d-flex align-items-center">
+                                    <div class="col-sm-6 order-md-2 text-right">
+                                        <div class="text-right">
+                                            <h4>Tổng thanh toán:</h4>
+                                            <h1><%= totalPrice %> VNĐ </h1>
+                                        </div>
+                                        <div>
+                                            <a href="/checkout" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Xác Nhận</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+                                        <a href="/allproduct">
+                                            <i class="fas fa-arrow-left mr-2"></i>Tiếp tục mua sắm</a>
+                                    </div>
+                                <% } else { %>
+                                    <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+                                        <a href="/allproduct">
+                                            <i class="fas fa-arrow-left mr-2"></i>Tiếp tục mua sắm</a>
+                                    </div> 
+                                    <% } %> 
             </section>
 </body>
 </html>
