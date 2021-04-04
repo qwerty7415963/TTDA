@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type='text/css' href="/main.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script type ="module" defer src="/js/script.js"></script>
+    <title>Bill</title>
+</head>
+<body>
+      
+    <div class="container mt-3">
+        <h2>Trang quản lí v0.1</h2>
+        <br>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+          <div class="collapse navbar-collapse" id="navbarsExample04">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/admin">Quản lí sản phẩm <span class="sr-only"></span></a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/bill">Đơn hàng</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">undermaintain</a>
+              </li>
+            </ul>
+            <form method="POST" action="/admin/logout?_method=DELETE">
+              <button class="btn btn-lg btn-light float-right">Đăng xuất</button>
+            </form>
+          </div>
+        </nav>
+        <% bills.forEach(bill => { %>
+            <div><%= bill %> </div>
+        <% }) %>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="width:30%">Mã đơn hàng
+                        <form style="display: inline-block ;">
+                            <div class="input-group rounded">
+                                <input type="search" class="form-control rounded" placeholder="Nhập tên sản phẩm" aria-label="Search"
+                                aria-describedby="search-addon" name="input_product" value="" />
+                                <span class="input-group-text border-0" id="search-addon">
+                                <i class="fas fa-search"></i>
+                                </span>
+                            </div>
+                        </form>
+                    </th> 
+                    <th style="width:15%">Ngày đặt hàng</th>
+                    <th style="width:20%">Thông tin khách hàng</th>
+                    <th style="width:15%">Sản phẩm mua</th>
+                    <th style="width:10%">Trạng thái</th>
+                    <th style="width:10%"></th>
+                </tr>
+            </thead> 
+            <tbody>
+                <% bills.forEach(bill => { %>
+                    <tr>
+                        <td>
+                            <strong><%= bill._id %> </strong>
+                        </td>
+                        <td>
+                            <strong><%= bill.date.toISOString().split('T')[0] %></strong>
+                        </td>
+                        <td>
+                            <strong>
+                                <%= bill.name %><br>
+                                SĐT: <%= bill.phonenumber %><br>
+                                Địa chỉ: <%= bill.address %><br>
+                                
+                               <% if(bill.card_name != '' && bill.card_number != null ) { %>
+                                CTK: <%= bill.card_name %><br>
+                                STK: <%= bill.card_number %>  
+                                <% } %> 
+                            </strong>
+                        </td>
+                        <td>
+                            <% bill.bill_info.forEach((items,index) => { %>
+                                <div><%= items.item.name %> SL:<%= items.qty %> </div>
+                                <div>
+                                    Tổng: <%= items.price %> 
+                                </div>
+                            <% }) %> 
+                        </td>
+                        <td>
+                            <%= bill.state %> 
+                        </td>
+                        <td class="actions">
+                            <div class="text-right">
+                                <button  style="display: inline-block;" class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                    <i class="fas fa-sync"></i>
+                                </button>
+                                <form style="display: inline-block;" method="POST" action="/bill/<%= bill._id %>?_method=DELETE"> 
+                                    <button class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+</body>
+</html>

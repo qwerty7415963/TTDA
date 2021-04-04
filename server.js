@@ -52,6 +52,7 @@ const allproductroute = require('./routes/allproduct')
 const adminroute = require('./routes/admin')
 const cartroute = require('./routes/cart')
 const checkoutroute = require('./routes/checkout')
+const billroute = require('./routes/bill')
 
 app.use('/',homeroute)
 app.use('/signup',signuproute)
@@ -60,6 +61,7 @@ app.use('/allproduct',allproductroute)
 app.use('/admin',adminroute)
 app.use('/cart',cartroute)
 app.use('/checkout',checkoutroute)
+app.use('/bill',billroute)
 //
 app.use('/success',(req,res) => {
     res.send(req.user)

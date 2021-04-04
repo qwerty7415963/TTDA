@@ -19,6 +19,7 @@ var storage = multer.diskStorage({
 
 router.get('/', async (req,res) => {
     let searchoption = {}
+    console.log(searchoption)
     if(req.query.input_product != null && req.query.input_product !== ""){
         searchoption.name = new RegExp(req.query.input_product,'i')
     }
@@ -33,7 +34,7 @@ router.get('/', async (req,res) => {
     }
 })
 
-router.get('/new' ,(req,res) => {
+router.get('/new',(req,res) => {
     renderNewPage(res, new Product())
 })
 
@@ -113,7 +114,6 @@ router.delete('/:id',async (req,res) => {
     let del_product
     try {
         del_product = await Product.findById(req.params.id)
-        console.log(del_product.filePath)
         await del_product.remove()
         fs.unlink(del_product.filePath, (err) => {if(err) console.log(err)})
         res.redirect('/admin')
@@ -123,6 +123,7 @@ router.delete('/:id',async (req,res) => {
         })
     }
 })
+
 async function renderNewPage(res ,product, hasError = false) {
     try {
         const product = await Product.find({})
@@ -133,5 +134,19 @@ async function renderNewPage(res ,product, hasError = false) {
         res.redirect('/admin')
     }
 }
+
+function checkAuthenticated(req,res,next) {
+    if(req.isAuthenticated()) {
+        return next()
+    }
+    res.redirect('/login')
+}
+
+router.delete('/logout',(req,res)=>{
+    req.logOut()
+    req.redirect('/login')
+})
+
+
 
 module.exports = router

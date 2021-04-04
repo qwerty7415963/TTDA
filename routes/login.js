@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 router.post('/',(req,res,next) => {
     initializePassport(passport,req.body.email)
     passport.authenticate('local', {
-        successRedirect: '/success',
+        successRedirect: '/admin',
         failureRedirect: '/login',
         failureFlash: true
   })(req,res,next)

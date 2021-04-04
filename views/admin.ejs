@@ -11,25 +11,31 @@
     <link rel="stylesheet" type='text/css' href="/main.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <script type ="module" defer src="/js/script.js"></script>
-    <title>Admint</title>
+    <title>Admin</title>
 </head>
 <body>
    
         <div class="container mt-3">
             <h2>Trang quản lí v0.1</h2>
             <br>
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs">
-              <li class="nav-item">
-                <a id="allproduct_link" class="nav-link" data-toggle="tab" href="#allproduct">Quản lí sản phẩm</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
-              </li>
-            </ul>
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+              <div class="collapse navbar-collapse" id="navbarsExample04">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/admin">Quản lí sản phẩm <span class="sr-only"></span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/bill">Đơn hàng</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" href="#">undermaintain</a>
+                  </li>
+                </ul>
+                <form method="POST" action="/admin/logout?_method=DELETE">
+                  <button class="btn btn-lg btn-light float-right">Đăng xuất</button>
+                </form>
+              </div>
+            </nav>
           
             <!-- Tab panes -->
             <div class="tab-content">
@@ -80,14 +86,6 @@
                         <% }) %> 
                     </tbody>
                </table>
-              <div id="menu1" class="container tab-pane fade"><br>
-                <h3>Menu 1</h3>
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-              </div>
-              <div id="menu2" class="container tab-pane fade"><br>
-                <h3>Menu 2</h3>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-              </div>
             </div>
           </div>
 </body>

@@ -1,6 +1,6 @@
 @import './css/signup.css';
-@import './css/home.css';
-@import './css/login.css'
+@import './css/footer.css';
+@import './css/login.css';
 .card-img-top {
     width: 100%;
     height: 15vw;
