@@ -63,9 +63,7 @@ app.use('/cart',cartroute)
 app.use('/checkout',checkoutroute)
 app.use('/bill',billroute)
 //
-app.use('/success',(req,res) => {
-    res.send(req.user)
-})
+
 
 app.listen(process.env.PORT || 3000, () => {
     console.log("Server running at port 3k")

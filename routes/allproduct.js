@@ -1,4 +1,5 @@
 const express = require('express')
+const { Mongoose } = require('mongoose')
 const router = express.Router()
 const Product = require('../model/product_schema')
 
@@ -18,8 +19,15 @@ router.get('/',async (req,res) => {
     }
 })
 
-router.get('/:id', (req,res) => {
-    res.send(req.params.id)
+router.get('/:id', async (req,res) => {
+    try {
+        const product = await Product.findById(req.params.id)
+        res.render('product_info',{
+            products: product
+        })
+    } catch(err) {
+        console.log(err)
+    }
 })
 
 
